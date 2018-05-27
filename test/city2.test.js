@@ -7,19 +7,31 @@ const port = 3009;
 const { CityService } = require('../lib/business/');
 
 let loggerOptions = {
+    filename:"city-service",
     dir:'/data/log',
     app:'city-service',
-    console:true,
+    //console:true,
 }
 
-app.use(CityService.middleware(loggerOptions));
+let loggerOptions2 = {
+    filename:"what",
+    dir:'/data/log2',
+    app:'what',
+    level: 'error'
+    //console:true,
+}
+
+app.use(CityService.middleware("cityLogger", loggerOptions));
+app.use(CityService.middleware("lzyTest", loggerOptions2));
 
 app.use((ctx, next) => {
     if (ctx.url == '/') {
         ctx.cityLogger.setBusinessType("lzyTest").info('city service');
         ctx.cityLogger.info('city service 2');
-        ctx.cityLogger.setBusinessType("lzyTest2").info('city service 2');
-        ctx.cityLogger.info('city service 3');
+        //ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
+        //ctx.lzyTest.error('city service 3');
+        ctx.lzyTest.setBusinessType("lzyTest2").info('city service 2');
+        ctx.lzyTest.info('city service 3');
         
         ctx.body = 'city service!';
     }
