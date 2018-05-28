@@ -4,7 +4,13 @@ var Koa = require('koa');
 var app = new Koa();
 const port = 3009;
 
-const { CityService } = require('../lib/business/');
+const { BaseLogger, CityService } = require('../lib/business/');
+
+let baseLogger = new BaseLogger({
+    dir:'./logs'
+});
+
+baseLogger.info("test base logger.")
 
 let loggerOptions = {
     filename:"city-service",
@@ -26,16 +32,19 @@ app.use(CityService.middleware("lzyTest", loggerOptions2));
 
 app.use((ctx, next) => {
     if (ctx.url == '/') {
+        
+        /*
         ctx.cityLogger.setBusinessType("lzyTest").info('city service');
         ctx.cityLogger.info('city service 2');
+        */
 
         // test error
         //ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
         //ctx.lzyTest.error('city service 3');
 
         // test info
-        ctx.lzyTest.setBusinessType("lzyTest2").info('city service 2');
-        ctx.lzyTest.info('city service 3');
+        // ctx.lzyTest.setBusinessType("lzyTest2").info('city service 2');
+        // ctx.lzyTest.info('city service 3');
 
         ctx.body = 'city service!';
     }
