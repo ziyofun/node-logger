@@ -1,6 +1,6 @@
 {
   "name": "@sensoro/node-logger",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "一个通用的日志标准库，为Node应用提供一个统一标准",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "moment": "^2.18.1",
     "shimmer": "^1.1.0",
     "winston": "^2.4.2",
-    "winston-daily-rotate-file": "^1.4.6"
+    "winston-daily-rotate-file": "^3.2.0"
   },
   "devDependencies": {
     "express": "^4.16.2",

@@ -6,10 +6,12 @@ const port = 3009;
 
 const { BaseLogger, CityService } = require('../lib/business/');
 
-let baseLogger = new BaseLogger({
-    dir:'./logs'
+let baseLogger = new BaseLogger("lzytest", {
+    filename:"lzy",
+    dir:'./logs2'
 });
 
+baseLogger.setIP("127.0.0.1");
 baseLogger.info("test base logger.")
 
 let loggerOptions = {
@@ -27,8 +29,10 @@ let loggerOptions2 = {
     //console:true,
 }
 
+/*
 app.use(CityService.middleware("cityLogger", loggerOptions));
 app.use(CityService.middleware("lzyTest", loggerOptions2));
+*/
 
 let testJson = {
     a:"1234\n5678",
