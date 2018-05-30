@@ -30,17 +30,22 @@ let loggerOptions2 = {
 app.use(CityService.middleware("cityLogger", loggerOptions));
 app.use(CityService.middleware("lzyTest", loggerOptions2));
 
+let testJson = {
+    a:"1234\n5678",
+    b: [1,2,3]
+}
+
+
 app.use((ctx, next) => {
     if (ctx.url == '/') {
         
-        /*
-        ctx.cityLogger.setBusinessType("lzyTest").info('city service');
+        // ctx.cityLogger.setBusinessType("lzyTest").info('city service');
+        ctx.cityLogger.setBusinessType("lzyTest").info(testJson);
         ctx.cityLogger.info('city service 2');
-        */
 
         // test error
-        //ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
-        //ctx.lzyTest.error('city service 3');
+        ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
+        ctx.lzyTest.error('city service 3');
 
         // test info
         // ctx.lzyTest.setBusinessType("lzyTest2").info('city service 2');
