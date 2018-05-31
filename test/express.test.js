@@ -2,7 +2,7 @@
 
 var express = require('express');
 var app = express();
-const Logger = require('../lib/business/baselogger');
+const Logger = require('../lib/business/base-logger');
 
 const loggerExpress = require('../lib/middleware/express');
 

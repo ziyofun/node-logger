@@ -2,7 +2,7 @@
 
 var Koa = require('koa');
 var app = new Koa();
-const Logger = require('../lib/business/baselogger');
+const Logger = require('../lib/business/base-logger');
 const port = 3009;
 
 const loggerKoa = require('../lib/middleware/koa1');

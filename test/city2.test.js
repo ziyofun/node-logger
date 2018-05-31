@@ -6,6 +6,14 @@ const port = 3009;
 
 const { CityService } = require('../lib/business/');
 
+
+let cityLogger = new CityService("lzylzy", {
+    filename:"lzy",
+    dir:'./log3'
+});
+
+cityLogger.info("test base logger.")
+
 let loggerOptions = {
     filename:"city-service",
     dir:'./log',
@@ -36,6 +44,8 @@ app.use((ctx, next) => {
         // ctx.cityLogger.setBusinessType("lzyTest").info('city service');
         ctx.cityLogger.setBusinessType("lzyTest").info(testJson);
         ctx.cityLogger.info('city service 2');
+        
+        
         
 
         // test error

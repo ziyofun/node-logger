@@ -1,8 +1,8 @@
 "use strict";
 
-const { CityService, BaseLogger } = require("./lib/business");
+const { CityServiceLogger, BaseLogger } = require("./lib/business");
 
 module.exports = {
-    CityService,
+    CityServiceLogger,
     BaseLogger,
 };
