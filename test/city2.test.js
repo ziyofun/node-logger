@@ -4,35 +4,25 @@ var Koa = require('koa');
 var app = new Koa();
 const port = 3009;
 
-const { BaseLogger, CityService } = require('../lib/business/');
-
-let baseLogger = new BaseLogger("lzytest", {
-    filename:"lzy",
-    dir:'./logs2'
-});
-
-baseLogger.setIP("127.0.0.1");
-baseLogger.info("test base logger.")
+const { CityService } = require('../lib/business/');
 
 let loggerOptions = {
     filename:"city-service",
-    dir:'/data/log',
+    dir:'./log',
     app:'city-service',
     //console:true,
 }
 
 let loggerOptions2 = {
     filename:"lzy-service",
-    dir:'/data/log2',
+    dir:'./log2',
     app:'lzy-service',
     level: 'error'
     //console:true,
 }
 
-/*
 app.use(CityService.middleware("cityLogger", loggerOptions));
 app.use(CityService.middleware("lzyTest", loggerOptions2));
-*/
 
 let testJson = {
     a:"1234\n5678",
@@ -46,6 +36,7 @@ app.use((ctx, next) => {
         // ctx.cityLogger.setBusinessType("lzyTest").info('city service');
         ctx.cityLogger.setBusinessType("lzyTest").info(testJson);
         ctx.cityLogger.info('city service 2');
+        
 
         // test error
         ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
