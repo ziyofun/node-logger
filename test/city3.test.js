@@ -4,15 +4,31 @@ var Koa = require('koa');
 var app = new Koa();
 const port = 3009;
 
-const { BaseLogger} = require('../lib/business/');
+const { BaseLogger, CityServiceLogger } = require('../lib/business/');
 
 let baseLogger = new BaseLogger("lzytest", {
     filename:"lzy",
-    dir:'./logs2'
+    dir:'./logs2',
+    app: 'lzy',
+    console: true
 });
 
 baseLogger.setIP("127.0.0.1");
 baseLogger.info("test base logger.")
+baseLogger.info("test base logger 2.")
+baseLogger.info("test base logger 3.")
+
+let cityServiceLogger = new BaseLogger("lzytest2", {
+    filename:"lzy2",
+    dir:'./logs2',
+    app: 'lzy2',
+    console: true
+});
+
+cityServiceLogger.setIP("127.0.0.1");
+cityServiceLogger.info("test city logger.")
+cityServiceLogger.info("test city logger 2.")
+cityServiceLogger.info("test city logger 3.")
 
 let loggerOptions = {
     filename:"mw",
@@ -29,8 +45,8 @@ let loggerOptions2 = {
     //console:true,
 }
 
-app.use(BaseLogger.middleware("baseLogger", loggerOptions));
-//app.use(BaseLogger.middleware("lzyTest", loggerOptions2));
+app.use(CityServiceLogger.middleware("cityLogger", loggerOptions));
+// app.use(BaseLogger.middleware("baseLogger", loggerOptions));
 
 let testJson = {
     a:"1234\n5678",
@@ -41,8 +57,8 @@ let testJson = {
 app.use((ctx, next) => {
     if (ctx.url == '/') {
         
-        // ctx.cityLogger.setBusinessType("lzyTest").info('city service');
-        ctx.baseLogger.info('base logger test 1');
+        ctx.cityLogger.setBusiness("business");
+        ctx.cityLogger.info('base logger test 1');
         
         /*
         // test error
