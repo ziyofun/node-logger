@@ -6,6 +6,7 @@ const port = 3009;
 
 const { BaseLogger, CityServiceLogger } = require('../lib/business/');
 
+/*
 let baseLogger = new BaseLogger("lzytest", {
     filename:"lzy",
     dir:'./logs2',
@@ -29,6 +30,7 @@ cityServiceLogger.setIP("127.0.0.1");
 cityServiceLogger.info("test city logger.")
 cityServiceLogger.info("test city logger 2.")
 cityServiceLogger.info("test city logger 3.")
+*/
 
 let loggerOptions = {
     filename:"mw",
@@ -57,7 +59,7 @@ let testJson = {
 app.use((ctx, next) => {
     if (ctx.url == '/') {
         
-        ctx.cityLogger.setBusiness("business");
+        // ctx.cityLogger.setBusiness("business");
         ctx.cityLogger.info('base logger test 1');
         
         /*
