@@ -33,10 +33,10 @@ cityServiceLogger.info("test city logger 3.")
 */
 
 let loggerOptions = {
-    filename:"mw",
-    dir:'./log3',
-    app:'mw',
-    console:true,
+    filename:"mw",      // 日志文件名前缀
+    dir:'./log3',       // 日志文件目录
+    app:'city-service', // 服务名
+    console:true,       // 是否在console打印
 }
 
 let loggerOptions2 = {
@@ -47,7 +47,7 @@ let loggerOptions2 = {
     //console:true,
 }
 
-app.use(CityServiceLogger.middleware("cityLogger", loggerOptions));
+app.use(CityServiceLogger.middleware("logger", loggerOptions)); // 1.实例名, 2. 配置
 // app.use(BaseLogger.middleware("baseLogger", loggerOptions));
 
 let testJson = {
@@ -59,18 +59,11 @@ let testJson = {
 app.use((ctx, next) => {
     if (ctx.url == '/') {
         
-        // ctx.cityLogger.setBusiness("business");
-        ctx.cityLogger.info('base logger test 1');
+        ctx.logger.info('base logger test 1');
         
-        /*
-        // test error
-        ctx.lzyTest.setBusinessType("lzyTest2").error('city service 2');
-        ctx.lzyTest.error('city service 3');
-        */
+        ctx.logger.info('lzy');
         
-        // test info
-        // ctx.lzyTest.setBusinessType("lzyTest2").info('city service 2');
-        // ctx.lzyTest.info('city service 3');
+        ctx.logger.error('error!!');
         
         ctx.body = 'city service!';
     }
@@ -83,11 +76,6 @@ app.use((ctx, next) => {
         ctx.logger.warn('测试warn', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
         ctx.logger.error('测试error', new Error('city service'));
         */
-        
-        ctx.cityLogger.debug('测试debug', {hello: 'city service'});
-        ctx.cityLogger.info('测试info', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.cityLogger.warn('测试warn', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.cityLogger.error('测试error', new Error('city service'));
         
         ctx.body = 'City Service!';
     }
