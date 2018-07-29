@@ -33,6 +33,7 @@ cityServiceLogger.info("test city logger 3.")
 */
 
 let loggerOptions = {
+    name: 'logger',
     filename:"base",      // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'base-service', // 服务名
@@ -41,6 +42,7 @@ let loggerOptions = {
 }
 
 let loggerOptions2 = {
+    name: 'logger2',
     filename:"base2",      // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'base-service', // 服务名
@@ -49,8 +51,8 @@ let loggerOptions2 = {
 }
 
 
-app.use(BaseLogger.middleware("logger", loggerOptions)); // 1.实例名, 2. 配置
-app.use(BaseLogger.middleware("logger2", loggerOptions2)); // 1.实例名, 2. 配置
+app.use(BaseLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
+app.use(BaseLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
 
 let testJson = {
     a:"1234\n5678",
@@ -73,14 +75,9 @@ app.use(async function handler(ctx, next) {
         await next();
     }
     
-    if (ctx.url == '/ping') {
+    if (ctx.url == '/debug') {
         
-        /*
-        ctx.logger.debug('测试debug', {hello: 'city service'});
-        ctx.logger.info('测试info', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.logger.warn('测试warn', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.logger.error('测试error', new Error('city service'));
-        */
+        ctx.logger.debug('lzy');
         
         ctx.body = 'City Service!';
     }
