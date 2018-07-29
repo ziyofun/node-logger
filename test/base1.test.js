@@ -6,45 +6,11 @@ const port = 3009;
 
 const { BaseLogger, CityServiceLogger } = require('../lib/business/');
 
-/*
-let baseLogger = new BaseLogger("lzytest", {
-    filename:"lzy",
-    dir:'./logs2',
-    app: 'lzy',
-    console: true
-});
-
-baseLogger.setIP("127.0.0.1");
-baseLogger.info("test base logger.")
-baseLogger.info("test base logger 2.")
-baseLogger.info("test base logger 3.")
-
-let cityServiceLogger = new BaseLogger("lzytest2", {
-    filename:"lzy2",
-    dir:'./logs2',
-    app: 'lzy2',
-    console: true
-});
-
-cityServiceLogger.setIP("127.0.0.1");
-cityServiceLogger.info("test city logger.")
-cityServiceLogger.info("test city logger 2.")
-cityServiceLogger.info("test city logger 3.")
-*/
-
 let loggerOptions = {
     filename:"base",      // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'base-service', // 服务名
     console:true,       // 是否在console打印
-}
-
-let loggerOptions2 = {
-    filename:"lzy-service",
-    dir:'/data/log2',
-    app:'lzy-service',
-    level: 'error'
-    //console:true,
 }
 
 app.use(BaseLogger.BaseLogger.middleware("logger", loggerOptions)); // 1.实例名, 2. 配置
@@ -81,6 +47,6 @@ app.use((ctx, next) => {
     
 });
 
-var server = app.listen(port, function () {
+let server = app.listen(port, function () {
     console.log(`服务程序在${port}端口启动`);
 });
