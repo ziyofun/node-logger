@@ -1,29 +1,57 @@
 "use strict";
 
-var Koa = require('koa');
-var app = new Koa();
+
+let Koa = require('koa');
+let app = new Koa();
 const port = 3009;
 
-const { CityService } = require('../lib/business/');
+const { CityServiceLogger } = require('../lib/business/');
 
-app.use(CityService.middleware({
-    dir:'/data/log',
-    app:'city-service',
-}));
+let loggerOptions = {
+    name: 'logger',     // logger实例的名字
+    filename:"city",    // 日志文件名前缀
+    dir:'./log3',       // 日志文件目录
+    app:'city-service', // 服务名
+    level: 'info',
+    console:true,       // 是否在console打印
+}
 
-app.use((ctx, next) => {
+let loggerOptions2 = {
+    name: 'logger2',    // logger实例的名字
+    filename:"city",   // 日志文件名前缀
+    dir:'./log3',       // 日志文件目录
+    app:'base-service', // 服务名
+    level: 'info',
+    console:true,       // 是否在console打印
+}
+
+
+app.use(CityServiceLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
+app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+
+app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {
-        ctx.logger.info('city service');
+
+        ctx.logger.info('base logger test 1');
+        ctx.logger.info('i am a template added by %s', 'nathan', 'but not lzy, haha!')
+    
+        ctx.logger2.info('base logger test 2');
+        ctx.logger.debug('lzy');
+
+        ctx.logger.error('error!!');
+
         ctx.body = 'city service!';
+
+        await next();
     }
     
-    if (ctx.url == '/ping') {
-        ctx.logger.debug('测试debug', {hello: 'city service'});
-        ctx.logger.info('测试info', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.logger.warn('测试warn', {userId: 21343, info: 'city service'}, {userId: 21343, info: 'city service'});
-        ctx.logger.error('测试error', new Error('city service'));
+    if (ctx.url == '/debug') {
+        
+        ctx.logger.debug('lzy');
+        
         ctx.body = 'City Service!';
     }
+    
 });
 
 var server = app.listen(port, function () {
