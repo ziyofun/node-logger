@@ -34,11 +34,15 @@ app.use(async function handler(ctx, next) {
 
         ctx.logger.info('base logger test 1');
         ctx.logger.info('i am a template added by %s', 'nathan', 'but not lzy, haha!')
+        ctx.logger.info('json: %j, string: %s', {a:1, b:2}, "abc");
     
         ctx.logger2.info('base logger test 2');
+        
+        /*
         ctx.logger.debug('lzy');
 
         ctx.logger.error('error!!');
+        */
 
         ctx.body = 'city service!';
 
@@ -47,7 +51,7 @@ app.use(async function handler(ctx, next) {
     
     if (ctx.url == '/debug') {
         
-        ctx.logger.debug('lzy');
+        // ctx.logger.debug('lzy');
         
         ctx.body = 'City Service!';
     }
