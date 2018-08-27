@@ -10,7 +10,7 @@ let loggerOptions = {
     name: 'logger',     // logger实例的名字
     filename:"base",    // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
-    app:'base-service', // 服务名
+    app:'base-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
 }
@@ -19,7 +19,7 @@ let loggerOptions2 = {
     name: 'logger2',    // logger实例的名字
     filename:"base2",   // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
-    app:'base-service', // 服务名
+    app:'base-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
 }
@@ -34,12 +34,12 @@ app.use(async function handler(ctx, next) {
         ctx.logger.info('base logger test 1');
         ctx.logger2.info('base logger test 2');
         ctx.logger.info('i am a template added by %s', 'nathan', 'but not lzy, haha!')
-        
         ctx.logger.debug('lzy');
-        
         ctx.logger.error('error!!');
         
-        ctx.body = 'city service!';
+        ctx.logger.debug('debug');
+        
+        ctx.body = 'city logger!';
         
         await next();
     }
