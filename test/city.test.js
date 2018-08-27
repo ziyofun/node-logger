@@ -26,8 +26,33 @@ let loggerOptions2 = {
 }
 
 
+let useDebug = 0;
+let useTrace = 0;
+
+process.on('SIGUSR1', () => {
+    console.log('catch USR1');
+    if (useDebug === 0) {
+        useDebug = 1;
+    }
+    else {
+        useDebug = 0;
+    }
+});
+
+process.on('SIGUSR2', () => {
+    console.log('catch USR2');
+    if (useTrace === 0) {
+        useTrace = 1;
+    }
+    else {
+        useTrace = 0;
+    }
+})
+
+
 app.use(CityServiceLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
 app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+
 
 app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {
@@ -55,9 +80,16 @@ app.use(async function handler(ctx, next) {
         
         ctx.body = 'City Service!';
     }
-    
+    if (ctx.url === '/debug') {
+        ctx.body = useDebug;
+    }
+    if (ctx.url === '/trace') {
+        ctx.body = useTrace;
+    }
 });
 
 var server = app.listen(port, function () {
     console.log(`服务程序在${port}端口启动`);
 });
+
+
