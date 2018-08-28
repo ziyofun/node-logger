@@ -33,7 +33,6 @@ app.use(async function handler(ctx, next) {
         
         ctx.logger.info('base logger test 1');
         
-        /*
         ctx.logger2.info('base logger test 2');
         ctx.logger.info('i am a template added by %s', 'nathan', 'but not lzy, haha!')
         ctx.logger.debug('lzy');
@@ -42,7 +41,6 @@ app.use(async function handler(ctx, next) {
         ctx.logger.debug('debug');
         
         ctx.body = 'city logger!';
-        */
         
         await next();
     }
