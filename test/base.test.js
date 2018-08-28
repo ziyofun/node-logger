@@ -4,7 +4,7 @@ let Koa = require('koa');
 let app = new Koa();
 const port = 3009;
 
-const { BaseLogger, CityServiceLogger } = require('../lib/business/');
+const { BaseLogger, CityServiceLogger } = require('../lib/logger');
 
 let loggerOptions = {
     name: 'logger',     // logger实例的名字
