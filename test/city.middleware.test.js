@@ -8,8 +8,9 @@ const port = 3009;
 const { CityServiceLogger } = require('../lib/logger');
 
 let loggerOptions = {
+    // fmt: 'city',
     name: 'logger',     // logger实例的名字
-    filename:"city",    // 日志文件名前缀
+    filename:"app",    // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'city-logger', // 服务名
     level: 'info',
@@ -18,8 +19,9 @@ let loggerOptions = {
 }
 
 let loggerOptions2 = {
+    // fmt: 'city',
     name: 'logger2',    // logger实例的名字
-    filename:"city2",   // 日志文件名前缀
+    filename:"app2",   // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'base-logger', // 服务名
     level: 'info',
@@ -40,7 +42,7 @@ app.use(async function handler(ctx, next) {
         ctx.logger.info('json: %j, string: %s', {a:1, b:2}, "abc");
         ctx.logger.debug('debug');
     
-        ctx.logger2.info('base logger test 2');
+        // ctx.logger2.info('base logger test 2');
         
         ctx.body = 'city logger!';
 
