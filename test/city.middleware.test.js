@@ -14,6 +14,7 @@ let loggerOptions = {
     app:'city-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
+    needErrorFile: true,
 }
 
 let loggerOptions2 = {
@@ -23,6 +24,7 @@ let loggerOptions2 = {
     app:'base-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
+    needErrorFile: true,
 }
 
 
