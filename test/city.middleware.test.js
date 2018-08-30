@@ -15,7 +15,7 @@ let loggerOptions = {
     app:'city-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
-    needErrorFile: true,
+    // needErrorFile: true,
 }
 
 let loggerOptions2 = {
@@ -26,12 +26,12 @@ let loggerOptions2 = {
     app:'base-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
-    needErrorFile: true,
+    // needErrorFile: true,
 }
 
 
 app.use(CityServiceLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
-app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+// app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
 
 app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {
