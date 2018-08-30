@@ -1,7 +1,7 @@
 'use strict';
 
 
-const { BaseLogger, CityServiceLogger } = require('../lib/logger');
+const { BaseLogger, PreviousLogger } = require('../lib/logger');
 
 let loggerOptions = {
     name: 'logger',     // logger实例的名字
@@ -13,5 +13,14 @@ let loggerOptions = {
 }
 
 let baseLogger = new BaseLogger(loggerOptions);
+let baseLogger2 = new BaseLogger(loggerOptions);
 
+
+baseLogger.setModule('lmModule');
 baseLogger.info('baobaobao');
+baseLogger.info('baobaobao');
+baseLogger.info('baobaobao');
+baseLogger.info('baobaobao');
+
+baseLogger2.setModule('blModule');
+baseLogger2.info('aaaa');

@@ -3,6 +3,6 @@
 const { CityServiceLogger, BaseLogger } = require("./lib/business");
 
 module.exports = {
-    CityServiceLogger,
+    CityServiceLogger: PreviousLogger,
     BaseLogger,
 };

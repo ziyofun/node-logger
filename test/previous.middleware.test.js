@@ -5,33 +5,29 @@ let Koa = require('koa');
 let app = new Koa();
 const port = 3009;
 
-const { CityServiceLogger } = require('../lib/logger');
+const { PreviousLogger } = require('../lib/logger');
 
 let loggerOptions = {
-    // fmt: 'city',
     name: 'logger',     // logger实例的名字
     filename:"app",    // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'city-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
-    // needErrorFile: true,
 }
 
 let loggerOptions2 = {
-    // fmt: 'city',
     name: 'logger2',    // logger实例的名字
     filename:"app2",   // 日志文件名前缀
     dir:'./log3',       // 日志文件目录
     app:'base-logger', // 服务名
     level: 'info',
     console:true,       // 是否在console打印
-    // needErrorFile: true,
 }
 
 
-app.use(CityServiceLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
-// app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+app.use(PreviousLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
+// app.use(PreviousLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
 
 app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {
