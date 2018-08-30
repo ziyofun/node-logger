@@ -18,7 +18,6 @@ let loggerOptions = {
     console:true,       // 是否在console打印
 }
 
-/*
 let loggerOptions2 = {
     datePattern: '-YYYY-MM-DD',
     isDatePrefix: false,
@@ -29,11 +28,10 @@ let loggerOptions2 = {
     level: 'info',
     console:true,       // 是否在console打印
 }
-*/
 
 
 app.use(BaseLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
-// app.use(BaseLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+app.use(BaseLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
 
 app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {
@@ -46,7 +44,7 @@ app.use(async function handler(ctx, next) {
         ctx.logger.error('error!!');
         ctx.logger.debug('debug');
         
-        // ctx.logger2.info('base logger test 2');
+        ctx.logger2.info('base logger test 2');
         
         ctx.body = 'city logger!';
         
