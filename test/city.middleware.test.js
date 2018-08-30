@@ -27,7 +27,7 @@ let loggerOptions2 = {
 
 
 app.use(CityServiceLogger.middleware(loggerOptions)); // 1.实例名, 2. 配置
-app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
+// app.use(CityServiceLogger.middleware(loggerOptions2)); // 1.实例名, 2. 配置
 
 app.use(async function handler(ctx, next) {
     if (ctx.url == '/') {

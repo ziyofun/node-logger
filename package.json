@@ -22,6 +22,7 @@
     "mkdirp": "^0.5.1",
     "moment": "^2.18.1",
     "shimmer": "^1.1.0",
+    "shortid": "^2.2.13",
     "winston": "^3.0.0",
     "winston-daily-rotate-file": "^3.3.2"
   },
