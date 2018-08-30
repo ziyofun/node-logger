@@ -1,13 +1,12 @@
 'use strict';
 
 
-const { BaseLogger, PreviousLogger } = require('../lib/logger');
+const { BaseLogger } = require('../lib/logger');
 
 let loggerOptions = {
-    name: 'logger',     // logger实例的名字
-    filename:"base",    // 日志文件名前缀
-    dir:'./log3',       // 日志文件目录
-    app:'base-logger', // 服务名
+    name: 'logger',
+    filename:"base",
+    dir:'./log3',
     level: 'info',
     console:true,       // 是否在console打印
 }
@@ -16,11 +15,12 @@ let baseLogger = new BaseLogger(loggerOptions);
 let baseLogger2 = new BaseLogger(loggerOptions);
 
 
-baseLogger.setModule('lmModule');
-baseLogger.info('baobaobao');
-baseLogger.info('baobaobao');
-baseLogger.info('baobaobao');
-baseLogger.info('baobaobao');
+baseLogger.setModule('lora');
+baseLogger.info('city');
+baseLogger.info('city');
+baseLogger.info('city');
+baseLogger.info('city');
 
-baseLogger2.setModule('blModule');
-baseLogger2.info('aaaa');
+baseLogger2.setModule('coap');
+baseLogger2.info('iot');
+baseLogger2.info('iot');
