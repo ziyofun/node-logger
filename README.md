@@ -125,7 +125,7 @@ ctx.logger.setModule('root');
 'use strict';
 
 
-const { BaseLogger } = require('../lib/logger');
+const { BaseLogger } = require('@sensoro/node-logger');
 
 let loggerOptions = {
     name: 'logger',
@@ -158,7 +158,9 @@ let Koa = require('koa');
 let app = new Koa();
 const port = 3009;
 
-const { BaseLogger } = require('../lib/logger');
+const { BaseLogger } = require('@sensoro/node-logger');
+
+
 
 
 let loggerOptions = {
