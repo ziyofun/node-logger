@@ -2,6 +2,7 @@
 ### Node template
 # Logs
 logs
+test
 *.log
 npm-debug.log*
 
