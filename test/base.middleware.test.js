@@ -12,9 +12,9 @@ let loggerOptions = {
     datePattern: 'YYYYMMDD-',   // 日志文件名时间格式
     isDatePrefix: true,         // 日志文件名时间是否是前缀
     name: 'logger',             // logger实例的名字
-    filename:"test",             // 日志文件名filename部分
+    filename:"test",            // 日志文件名filename部分
     dir:'./log',                // 日志文件目录
-    level: 'info',
+    level: 'info',              // 最低日志等级
     console:true,               // 是否在console打印
     needErrorFile: true,        // 是否同时生成-error.log日志
 }
