@@ -1,8 +1,7 @@
 "use strict";
 
-const { PreviousLogger, BaseLogger } = require("./lib/logger");
+const { BaseLogger } = require("./lib/logger");
 
 module.exports = {
-    PreviousLogger,
     BaseLogger,
 };
