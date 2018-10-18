@@ -1,6 +1,6 @@
 {
   "name": "@sensoro/node-logger",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "一个通用的日志标准库，为Node应用提供一个统一标准",
   "main": "index.js",
   "scripts": {
