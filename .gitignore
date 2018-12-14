@@ -50,4 +50,6 @@ jspm_packages
 .yarn-integrity
 .idea
 
+.vscode
+
 
