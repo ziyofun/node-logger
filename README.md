@@ -46,21 +46,25 @@
 ```javascript
     // server.js
     const Koa = require('koa');
-    const { genTraceId } = require('@sensoro/city-logger');
+    const { genTraceId, ns } = require('@sensoro/city-logger');
+
+    const logger = require('./logger.js')('servers');
 
     const { middleware1 } = require('./slave1.js');
     const { middleware2 } = require('./slave2.js');
 
     const app = new Koa();
 
-    // 生成traceId
-    app.use(async(ctx, next) => {
-        genTraceId();
-        logger.info()
-        await middleware1();
-        await middleware2();
-        await next();
-    });
+    ns.run(() => {
+        // 生成traceId
+        app.use(async(ctx, next) => {
+            genTraceId();
+            logger.info()
+            await middleware1();
+            await middleware2();
+            await next();
+        });
+    })
 ```
 
 ```javascript
