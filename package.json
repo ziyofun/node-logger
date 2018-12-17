@@ -1,6 +1,6 @@
 {
   "name": "@sensoro/city-logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "一个通用的日志标准库，为Node应用提供一个统一标准",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "repository": {
     "type": "git"
   },
-  "author": [],
+  "author": "zhoufeng",
   "license": "ISC",
   "dependencies": {
     "bufferpack": "0.0.6",
