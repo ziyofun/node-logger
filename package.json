@@ -1,6 +1,6 @@
 {
   "name": "@sensoro/city-logger",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "一个通用的日志标准库，为Node应用提供一个统一标准",
   "main": "index.js",
   "scripts": {
