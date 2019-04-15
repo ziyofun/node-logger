@@ -1,4 +1,4 @@
-﻿﻿# city-logger
+﻿﻿# async-logger
 
 一个支持 traceId 的日志组建
 
@@ -25,7 +25,7 @@
 
     const config = require('config');
     const path = require('path');
-    const { Logger } = require('@sensoro/city-logger');
+    const { Logger } = require('async-logger');
 
     /**
     * require('./log')(name)
@@ -36,7 +36,7 @@
         const options = Object.assign({}, config.logger);
 
         // 组织一个绝对路径传入组件
-        options.dir = path.join(`${__dirname}/../../${config.logger.dir}`);
+        options.dir = path.join(`${__dirname}/${config.logger.dir}`);
         return Logger(config.logger)(name);
     };
 ```
@@ -46,7 +46,7 @@
 ```javascript
     // server.js
     const Koa = require('koa');
-    const { genTraceId, ns } = require('@sensoro/city-logger');
+    const { genTraceId, ns } = require('async-logger');
 
     const logger = require('./logger.js')('servers');
 
@@ -58,8 +58,7 @@
     ns.run(() => {
         // 生成traceId
         app.use(async(ctx, next) => {
-            genTraceId();
-            logger.info()
+            logger.info('this is entry script.')
             await middleware1();
             await middleware2();
             await next();
