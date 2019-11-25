@@ -5,6 +5,7 @@
         "outDir": "./dist",
         "baseUrl": "types",
         "typeRoots": ["./src/@types", "node_modules/@types"],
+        "declaration": true,
         "noImplicitAny": false,
         "moduleResolution": "node"
     },

@@ -1,7 +1,6 @@
 import { Option, AsyncLogger } from "./type";
-
 import { createLogger } from './logger';
-const path = require('path');
+import * as path from 'path';
 
 let loggerWithoutName: (moduleName: string) => AsyncLogger;
 

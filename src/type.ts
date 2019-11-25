@@ -12,8 +12,8 @@ export interface Option {
 }
 
 export interface AsyncLogger {
-    info() :void
-    debug() :void
-    warn() :void
-    error() :void
+    info(...args) :void
+    debug(...args) :void
+    warn(...args) :void
+    error(...args) :void
 }
