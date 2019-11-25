@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.COLORS = {
     reset: {
         open: '\u001b[0m',
@@ -71,8 +73,7 @@ exports.COLORS = {
         open: '\u001b[90m',
         close: '\u001b[39m'
     }
-}
-
+};
 exports.LEVELS = {
     VERBOSE: {
         level: 4,
@@ -104,4 +105,4 @@ exports.LEVELS = {
         string: 'ERROR',
         color: 'red'
     }
-}
+};

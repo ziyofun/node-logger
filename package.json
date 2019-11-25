@@ -1,8 +1,8 @@
 {
   "name": "async-logger",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "一个通用的日志标准库，为Node应用提供一个统一标准",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,10 @@
   "author": "zhoufeng",
   "license": "ISC",
   "dependencies": {
+    "@types/cls-hooked": "^4.3.0",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^12.12.11",
+    "@types/shortid": "0.0.29",
     "bufferpack": "0.0.6",
     "cls-hooked": "^4.2.2",
     "error-callsites": "^1.0.1",
