@@ -1,10 +1,11 @@
-import { createLogger, format, transports as Transports, Logger } from 'winston';
-import * as DailyRotateFile from 'winston-daily-rotate-file';
-import stringify from 'fast-safe-stringify';
 import * as moment from 'moment';
 import * as os from 'os';
+import { createLogger, format, Logger, transports as Transports } from 'winston';
+import * as DailyRotateFile from 'winston-daily-rotate-file';
+import { getTraceId } from '..';
 import { Option } from '../type';
 
+const { combine, timestamp } = format;
 
 // 格式化输出，用于输出到文件
 const loggerFormat = format.printf(options => {
@@ -13,20 +14,30 @@ const loggerFormat = format.printf(options => {
     // 处理多行message
     const message = options.message ? options.message.replace(/\r\n|\r|\n/g, `${os.EOL} | `) : options.message;
 
-    return `+ ${timestamp} ${options.level.toUpperCase()} ${message}`;
+    console.log('options :: %s', options);
+
+    return `+ ${timestamp} ${options.level.toUpperCase()} <${options.module || '--'}> {${options['trace-id']}} | ${message}`;
 });
 
-const instanceMapping = new Map<string, any>();
 // 工具函数，传入配置，返回一个winston实例
 export function createWinston(options: Option): Logger {
-    // 相同配置返回同一实例
-    const optionString = stringify(options);
-    if (instanceMapping.has(optionString)) {
-        return instanceMapping.get(optionString);
-    }
-
     const datePattern = options.datePattern || 'YYYYMMDD-';
     const filename = `${options.filename}%DATE%`;
+
+    // 定义不同的format
+    let formatter = combine(
+        format(info => {
+            info['trace-id'] = getTraceId();
+            return info;
+        })(),
+        timestamp(),
+    );
+
+    if (options.json) {
+        formatter = combine(formatter, format.json())
+    } else {
+        formatter = combine(formatter, loggerFormat)
+    }
 
     /** 通过不同的配置决定输出流 */
     const transports = [];
@@ -41,7 +52,7 @@ export function createWinston(options: Option): Logger {
                 json: false,
                 level: options.level,
                 maxSize: '100m',
-                format: loggerFormat,
+                format: formatter,
             })
         )
     }
@@ -51,7 +62,7 @@ export function createWinston(options: Option): Logger {
         transports.push(
             new Transports.Console({
                 level: options.level,
-                format: loggerFormat
+                format: formatter
             })
         )
     }
@@ -65,7 +76,7 @@ export function createWinston(options: Option): Logger {
                 datePattern: datePattern,
                 json: false,
                 level: 'error',
-                format: loggerFormat,
+                format: formatter,
             })
         )
     }
@@ -75,8 +86,6 @@ export function createWinston(options: Option): Logger {
         transports,
         exitOnError: false
     });
-
-    instanceMapping.set(optionString, instance);
 
     return instance;
 }
