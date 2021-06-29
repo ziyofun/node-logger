@@ -5,7 +5,7 @@ import * as DailyRotateFile from 'winston-daily-rotate-file';
 import { getTraceId } from '..';
 import { Option } from '../type';
 
-const { combine, timestamp } = format;
+const { combine, timestamp, splat } = format;
 
 // 格式化输出，用于输出到文件
 const loggerFormat = format.printf(options => {
@@ -13,8 +13,6 @@ const loggerFormat = format.printf(options => {
 
     // 处理多行message
     const message = options.message ? options.message.replace(/\r\n|\r|\n/g, `${os.EOL} | `) : options.message;
-
-    console.log('options :: %s', options);
 
     return `+ ${timestamp} ${options.level.toUpperCase()} <${options.module || '--'}> {${options['trace-id']}} | ${message}`;
 });
@@ -30,6 +28,7 @@ export function createWinston(options: Option): Logger {
             info['trace-id'] = getTraceId();
             return info;
         })(),
+        splat(),
         timestamp(),
     );
 

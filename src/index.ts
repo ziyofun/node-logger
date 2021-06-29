@@ -1,7 +1,6 @@
-import { EventEmitter } from 'events';
 import * as path from 'path';
 import { Logger } from "winston";
-import { createLogger, writer } from './logger';
+import { createLogger } from './logger';
 import { Option } from "./type";
 
 let loggerWithoutName: (moduleName: string) => Logger;
@@ -30,10 +29,6 @@ export function Logger (options: Option) {
             
             // createLogger返回一个以模块名为参数的方法，调用此方法即可获得一个logger‘实例’
             loggerWithoutName = createLogger(options);
-        }
-
-        if (options.autoTraceId) {
-            writer.bindEmitter(new EventEmitter());
         }
     
         // 公用logger实例，但各自通过闭包封装输出配置

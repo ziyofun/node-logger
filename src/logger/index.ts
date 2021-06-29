@@ -58,30 +58,26 @@ export const writer = CLS.createNamespace(namespace);
 // 获取当前threadLocal中的traceId
 export function getTraceId(): string {
     let traceId;
-    writer.run(() => {
-        traceId = writer.get('trace-id');
-        if (!traceId) {
-            traceId = genTraceId();
-        }
-    })
+    traceId = writer.get('trace-id');
+    if (!traceId) {
+        traceId = genTraceId();
+    }
     return traceId;
 };
 
 // 重新生成traceId
 export function genTraceId() {
     let traceId;
-    writer.run(() => {
-        traceId = shortid.generate();
-        writer.set('trace-id', traceId);
-    })
+    traceId = shortid.generate();
+    writer.set('trace-id', traceId);
     return traceId;
 };
 
 // 主动设定traceId
-export function setTraceId(traceId: string) {
-    writer.run(() => {
+export function setTraceId(traceId?: string) {
+    if (!traceId) {
         traceId = shortid.generate();
-        writer.set('trace-id', traceId);
-    })
+    }
+    writer.set('trace-id', traceId);
     return traceId
 }
