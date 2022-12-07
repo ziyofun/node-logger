@@ -31,7 +31,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^12.12.12",
     "@types/shortid": "0.0.29",
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "koa": "^2.4.1"
   }
 }
